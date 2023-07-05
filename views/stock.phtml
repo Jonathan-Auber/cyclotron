@@ -1,0 +1,29 @@
+<h1 class="text-center m-5">Liste des stocks produit</h1>
+
+<table class="table">
+    <thead>
+        <tr class=" align-middle">
+            <th scope="col">#</th>
+            <th scope="col">Produit</th>
+            <th scope="col">Référence</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Prix</th>
+            <?php if (isset($_SESSION['status']) && $_SESSION['status'] === 'boss') { ?><th scope="col"></th> <?php } ?>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $i = 1;
+        foreach ($products as $product) : ?>
+            <tr <?php if ($product['stock'] <= $product['stock_alert']) : ?> class="table-danger align-middle " <?php endif ?> class="align-middle ">
+                <th scope="row"><?= $i ?></th>
+                <td><?= $product['name'] ?></td>
+                <td><?= $product['reference'] ?></td>
+                <td><?= $product['stock'] ?></td>
+                <td><?= $product['price_ht'] ?></td>
+                <?php if (isset($_SESSION['status']) && $_SESSION['status'] === 'boss') { ?> <td class="text-end"><a href="/cyclotron/Products/formProduct/<?= $product['id'] ?>" type="button" class="btn btn-primary w-50">Modifier</button></td> <?php } ?>
+            </tr>
+        <?php $i++;
+        endforeach; ?>
+    </tbody>
+</table>

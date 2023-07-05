@@ -1,0 +1,40 @@
+<h1 class="text-center m-5">Formulaire de gestion client</h1>
+
+<form action="/cyclotron/Customers/createOrUpadateCustomer/<?php if (isset($customer)) echo $customer['id']; ?>" method="POST">
+
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Nom</label>
+        <input required type="text" class="form-control" id="lastName" name="lastName" value="<?php if (isset($customer)) echo $customer['lastname']; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="firstName" class="form-label">Prénom</label>
+        <input required type="text" class="form-control" id="firstName" name="firstName" value="<?php if (isset($customer)) echo $customer['firstname']; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="address" class="form-label">Adresse</label>
+        <input required type="text" class="form-control" id="address" name="address" value="<?php if (isset($customer)) echo $customer['address']; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="additional_address" class="form-label">Complément d'adresse</label>
+        <input type="text" class="form-control" id="additional_address" name="additional_address" value="<?php if (isset($customer)) echo $customer['additional_address']; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="city" class="form-label">Ville</label>
+        <input required type="text" class="form-control" id="city" name="city" value="<?php if (isset($customer)) echo $customer['city']; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="zipCode" class="form-label">Code postal</label>
+        <input required type="number" class="form-control" id="zipCode" name="zipCode" value="<?php if (isset($customer)) echo $customer['zip_code']; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Adresse email</label>
+        <input required type="email" class="form-control" id="email" name="email" value="<?php if (isset($customer)) echo $customer['email']; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Numéro de téléphone</label>
+        <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" value="<?php if (isset($customer)) echo $customer['phone_number']; ?>">
+    </div>
+
+    <div class="text-center m-5"><button type="submit" class="btn btn-success">Valider</button></div>
+
+</form>

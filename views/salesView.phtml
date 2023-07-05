@@ -1,0 +1,24 @@
+<h1 class="text-center m-5">Répertoire des vendeurs</h1>
+
+<table class="table">
+    <thead>
+        <tr class="align-middle">
+            <th scope="col">#</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $i = 1;
+        foreach ($users as $user) : ?>
+            <tr class="align-middle">
+                <td><?= $i ?></td>
+                <td><?= $user['username'] ?></td>
+                <td class="text-end"><a href="/cyclotron/Users/salesBySeller/<?= $user['id'] ?>" type="button" class="btn btn-primary w-50">Consulter les résultats</button></td>
+            </tr>
+        <?php
+            $i++;
+        endforeach; ?>
+    </tbody>
+</table>

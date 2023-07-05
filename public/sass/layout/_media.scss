@@ -1,0 +1,151 @@
+@media screen and (max-width: 1349px) {
+  /* Layout */
+  #wrap {
+    width: 100vw;
+    min-height: 90vh;
+  }
+  /* Logo */
+  #logo-desktop {
+    display: none;
+  }
+
+  #logo-mobile {
+    display: block;
+  }
+
+  /* Menu Burger */
+  .menu {
+    position: static;
+    padding: 0 1.5em;
+    width: 100vw;
+    height: 10vh;
+    flex-direction: row;
+    justify-content: space-between;
+    &__logo {
+      height: 10vh;
+      & img {
+        width: 10vh;
+        height: 100%;
+        transform: scale(2) translateX(15%);
+        -webkit-transform: scale(2) translateX(15%);
+        -moz-transform: scale(2) translateX(15%);
+        -ms-transform: scale(2) translateX(15%);
+        -o-transform: scale(2) translateX(15%);
+      }
+    }
+  }
+
+  .menu__nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transition: 1s ease-out;
+    -webkit-transition: 1s ease-out;
+    -moz-transition: 1s ease-out;
+    -ms-transition: 1s ease-out;
+    -o-transition: 1s ease-out;
+    background-color: rgb(31, 32, 57, 0.5);
+
+    & a {
+      width: auto;
+      padding: 0.5em;
+      text-align: center;
+      margin: 1.2rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  #menu-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    cursor: pointer;
+    z-index: 200;
+    padding: 0.5rem;
+
+    & span {
+      border: $font-primary-color solid 1px;
+      background-color: $font-primary-color;
+      transition: 0.4s ease-out;
+      -webkit-transition: 0.4s ease-out;
+      -moz-transition: 0.4s ease-out;
+      -ms-transition: 0.4s ease-out;
+      -o-transition: 0.4s ease-out;
+    }
+  }
+
+  .burger-top {
+    width: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .burger-middle {
+    width: 1.5rem;
+  }
+
+  .burger-bottom {
+    width: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Les classes qui seront Toggle pour le menu burger */
+
+  .fixed {
+    position: fixed;
+    top: 30px;
+    right: 25px;
+  }
+
+  .off {
+    display: none;
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+
+  .close-top {
+    margin-bottom: -1px;
+    transform: rotate(405deg);
+    -webkit-transform: rotate(405deg);
+    -moz-transform: rotate(405deg);
+    -ms-transform: rotate(405deg);
+    -o-transform: rotate(405deg);
+  }
+
+  .close-bottom {
+    margin-top: -1px;
+    width: 2rem;
+    transform: rotate(495deg);
+    -webkit-transform: rotate(495deg);
+    -moz-transform: rotate(495deg);
+    -ms-transform: rotate(495deg);
+    -o-transform: rotate(495deg);
+    animation: slideTop 1s ease-out 0;
+    -webkit-animation: slideTop 1s ease-out 0;
+  }
+
+  .display-link {
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+  }
+}

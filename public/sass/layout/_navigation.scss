@@ -1,0 +1,49 @@
+#logo-mobile {
+  display: none;
+}
+
+.menu {
+  position: fixed;
+  width: 15vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  background-color: $primary-color;
+  &__logo img {
+    object-fit: contain;
+    width: 100%;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+  }
+  &__nav {
+    margin-top: 2em;
+    & a {
+      display: block;
+      width: 90%;
+      margin: 5px auto;
+      padding: 10px 0 10px 10px;
+      color: $font-primary-color;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      &:hover {
+        background-color: rgba(223, 215, 215, 0.2);
+      }
+      & i {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+#menu-burger {
+  display: none;
+}

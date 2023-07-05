@@ -1,0 +1,20 @@
+/* Form */
+.input-container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  &__label {
+    margin: 1.5rem 0 0.5rem 0;
+  }
+  &__input {
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+  }
+}

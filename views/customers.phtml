@@ -1,0 +1,40 @@
+    <table class="table">
+        <thead>
+            <tr class="align-middle">
+                <!-- <th scope="col">#</th> -->
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Complément d'adresse</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Code postal</th>
+                <th scope="col">Email</th>
+                <th scope="col">Numéro</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($customers as $customer) : ?>
+                <tr class="align-middle">
+                    <!-- <th scope="row">1</th> -->
+                    <td><?= $customer['lastname'] ?></td>
+                    <td><?= $customer['firstname'] ?></td>
+                    <td><?= $customer['address'] ?></td>
+                    <td><?= $customer['additional_address'] ?></td>
+                    <td><?= $customer['city'] ?></td>
+                    <td><?= $customer['zip_code'] ?></td>
+                    <td><?= $customer['email'] ?></td>
+                    <td><?= $customer['phone_number'] ?></td>
+                    <td><a class="link-dark" href="/cyclotron/Invoice/createInvoice/<?= $customer['id'] ?>"><i class="fa-solid fa-file-circle-plus fa-xl"></i></a></td>
+                    <td><a class="link-dark" href="/cyclotron/Customers/invoiceByCustomer/<?= $customer['id'] ?>"><i class="fa-solid fa-file-invoice-dollar fa-xl"></i></a></td>
+                    <td class="text-end"><a href="/cyclotron/Customers/customerManagement/<?= $customer['id'] ?>" type="button" class="btn btn-primary w-100">Modifier</button></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <div class="text-center m-5"><a class="btn btn-success p-3" href="/cyclotron/Customers/customerManagement">Ajouter un nouveau client</a></div>
+    </div>
