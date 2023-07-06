@@ -63,6 +63,15 @@ class ProductsRepository extends Model
         return $query->fetch();
     }
 
+    public function getAlert()
+    {
+        $query = $this->pdo->prepare("SELECT * FROM products WHERE stock <= stock_alert");
+        $query->execute();
+        return $query->fetchAll();
+
+        // return compact("alert");
+    }
+
     /**
      * Updates the stock of a product.
      *

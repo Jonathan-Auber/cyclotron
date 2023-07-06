@@ -1,0 +1,24 @@
+<h1>Dashboard</h1>
+<main class="admin-dashboard">
+    <section class="admin-dashboard__header">
+        <!-- <h2>Accès rapide</h2> -->
+        <div class="card">
+            <h3>Chiffre d'affaire</h3>
+            <!-- <a class="link-btn" href="/cyclotron/Products/stock">Voir</a> -->
+
+        </div>
+        <div class="card">
+            <h3>Employé du mois</h3>
+            <!-- <a class="link-btn" href="/cyclotron/Products/stock">Voir</a> -->
+
+        </div>
+        <div class="card">
+            <h3>Alerte Stock</h3>
+            <?php foreach ($alerts as $alert) { ?>
+                <p><?= $alert['name'] ?> <span><?= $alert['stock'] ?></span>
+                <p>
+                <?php } ?>
+                <!-- <a class="link-btn" href="/cyclotron/Products/stock">Voir</a> -->
+        </div>
+    </section>
+</main>

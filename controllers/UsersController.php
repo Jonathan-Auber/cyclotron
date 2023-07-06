@@ -2,31 +2,56 @@
 
 namespace controllers;
 
+use models\ProductsRepository;
 use models\ReportingRepository;
 use utils\Render;
 
 class UsersController extends Controller
 {
     protected $modelName = \models\UsersRepository::class;
+    protected $product;
     protected $reporting;
 
     public function __construct()
     {
         parent::__construct();
         $this->reporting = new ReportingRepository();
+        $this->product = new ProductsRepository();
     }
 
 
     public function index()
     {
         if (isset($_SESSION['id'], $_SESSION["status"]) && $_SESSION['status'] === "boss") {
-            $this->adminView();
+            $this->adminDashboard();
         } elseif (isset($_SESSION['id'], $_SESSION["status"]) && $_SESSION['status'] === "seller") {
-            $this->sellerView();
+            $this->sellerDashboard();
         } else {
             $pageTitle = "Login";
             $indexTitle = "Espace de connexion";
             Render::render("index", compact("pageTitle", "indexTitle"));
+        }
+    }
+
+    public function adminDashboard()
+    {
+        $alerts = $this->product->getAlert();
+        $pageTitle = "Dashboard";
+        Render::render("adminDashboard", compact("pageTitle", "alerts"));
+    }
+
+    public function sellerDashboard()
+    {
+        $pageTitle = "Dashboard";
+        Render::render("sellerDashboardDashboard", compact("pageTitle"));
+    }
+
+    public function chartsView()
+    {
+        if (isset($_SESSION['id'], $_SESSION["status"]) && $_SESSION['status'] === "boss") {
+            $this->adminView();
+        } elseif (isset($_SESSION['id'], $_SESSION["status"]) && $_SESSION['status'] === "seller") {
+            $this->sellerView();
         }
     }
 

@@ -21,19 +21,24 @@
     </figure>
     <?php if (isset($_SESSION['id'])) { ?>
       <nav id="link-container" class="menu__nav">
+        <!-- <p><i class="fa-solid fa-user"></i></p> -->
         <a href="/cyclotron"><i class="fa-solid fa-compass"></i>Dashboard</a>
         <a href="/cyclotron/Customers/displayCustomers"><i class="fa-solid fa-address-book"></i>Fichier clients</a>
         <a href="/cyclotron/Products/stock"><i class="fa-solid fa-box-open"></i>Produits</a>
+        <a href="/cyclotron/Users/chartsView"><i class="fa-solid fa-chart-simple"></i></i></i>Statistiques</a>
+
         <?php if (isset($_SESSION['status']) && $_SESSION['status'] === "boss") { ?> <a href="/cyclotron/Users/salesView"><i class="fa-solid fa-user-check"></i>Employés</a> <?php } ?>
         <a href="/cyclotron/Users/logout"><i class="fa-solid fa-arrow-right-to-bracket"></i>Déconnexion</a>
       </nav>
+      <!-- Div pour évènement menu burger -->
+
+      <div id="menu-burger">
+        <span class="burger-top"></span>
+        <span class="burger-middle"></span>
+        <span class="burger-bottom"></span>
+      </div>
     <?php } ?>
-    <!-- Div pour évènement menu burger -->
-    <div id="menu-burger">
-      <span class="burger-top"></span>
-      <span class="burger-middle"></span>
-      <span class="burger-bottom"></span>
-    </div>
+
   </div>
 
   <div id="wrap">

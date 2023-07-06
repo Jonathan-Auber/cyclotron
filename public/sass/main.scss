@@ -4,10 +4,13 @@
 @import "./utils/variables";
 @import "./components/buttons";
 @import "./components/form";
-
+@import "./components/card";
 @import "./layout/layout.scss";
-@import "./layout/navigation.scss";
+@import "./layout/menu-burger.scss";
+
 @import "./pages/index.scss";
+@import "./pages/adminDashboard.scss";
+
 @import "./pages/adminView.scss";
 
 @import "./pages/error";
