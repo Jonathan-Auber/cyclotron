@@ -21,13 +21,13 @@
     </figure>
     <?php if (isset($_SESSION['id'])) { ?>
       <nav id="link-container" class="menu__nav">
-        <!-- <p><i class="fa-solid fa-user"></i></p> -->
-        <a href="/cyclotron"><i class="fa-solid fa-compass"></i>Dashboard</a>
+        <p class="tablet-hide"><i class="fa-solid fa-user"></i><?= $_SESSION["username"] ?></p>
+        <a href="/cyclotron/Users/dashboard"><i class="fa-solid fa-compass"></i>Dashboard</a>
         <a class="mobile-hide" href="/cyclotron/Customers/displayCustomers"><i class="fa-solid fa-address-book"></i>Fichier clients</a>
         <a href="/cyclotron/Products/stock"><i class="fa-solid fa-box-open"></i>Produits</a>
         <a class="tablet-hide" href="/cyclotron/Users/chartsView"><i class="fa-solid fa-chart-simple"></i></i></i>Statistiques</a>
 
-        <?php if (isset($_SESSION['status']) && $_SESSION['status'] === "boss") { ?> <a class="mobile-hide" href="/cyclotron/Users/displayEmployees"><i class="fa-solid fa-user-check"></i>Employés</a> <?php } ?>
+        <?php if (isset($_SESSION['status']) && $_SESSION['status'] === "1") { ?> <a class="mobile-hide" href="/cyclotron/Users/displayEmployees"><i class="fa-solid fa-user-check"></i>Employés</a> <?php } ?>
         <a href="/cyclotron/Users/logout"><i class="fa-solid fa-arrow-right-to-bracket"></i>Déconnexion</a>
       </nav>
       <!-- Div pour évènement menu burger -->

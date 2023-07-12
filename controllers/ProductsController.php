@@ -11,6 +11,7 @@ class ProductsController extends Controller
     public function stock()
     {
         $this->session->isConnected();
+
         $pageTitle = "Stock";
         $products = $this->model->findAll();
         Render::render("stock", compact('pageTitle', 'products'));
@@ -19,6 +20,7 @@ class ProductsController extends Controller
     public function productsManagement(int $productId)
     {
         $this->session->isAdmin();
+
         $pageTitle = "Edition des stock";
         $product = $this->model->find($productId);
         Render::render("productsManagement", compact("pageTitle", "product"));
@@ -27,6 +29,7 @@ class ProductsController extends Controller
     public function updateProduct(int $productId)
     {
         $this->session->isAdmin();
+
         $this->model->updateProduct($productId);
         $pageTitle = "Stock";
         $products = $this->model->findAll();

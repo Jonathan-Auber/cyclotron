@@ -1,4 +1,4 @@
-<h1>Répertoire des vendeurs</h1>
+<h1>Répertoire des employés</h1>
 
 <main id="employees">
     <table class="table">
@@ -16,7 +16,33 @@
                 <tr class="align-middle">
                     <td><?= $i ?></td>
                     <td><?= $user['username'] ?></td>
-                    <td class="text-end"><a href="/cyclotron/Users/salesBySeller/<?= $user['id'] ?>" type="button" class="btn btn-primary w-50">Consulter les résultats</button></td>
+                    <td class="d-flex flex-column align-items-end">
+                        <a href="/cyclotron/Users/salesBySeller/<?= $user['id'] ?>" type="button" class="btn btn-primary w-25 m-1">Consulter les résultats</a>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger w-25 m-1" data-bs-toggle="modal" data-bs-target="#modal<?= $i ?>">
+                            Supprimer
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal" id="modal<?= $i ?>" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Êtes-vous sûr?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>La suppression de cette utilisateur sera définitive.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                        <a href="/cyclotron/Users/deleteEmployee/<?= $user['id'] ?>" type="button" class="btn btn-danger">Confirmer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             <?php
                 $i++;

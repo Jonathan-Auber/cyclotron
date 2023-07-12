@@ -168,6 +168,12 @@ main {
 .menu__nav {
   margin-top: 2em;
 }
+.menu__nav p {
+  width: 90%;
+  margin: 0 auto 5em auto;
+  padding: 10px 0 10px 10px;
+  color: #cccccc;
+}
 .menu__nav a {
   display: block;
   width: 90%;
@@ -186,7 +192,7 @@ main {
   background-color: rgba(223, 215, 215, 0.2);
   color: white;
 }
-.menu__nav a i {
+.menu__nav i {
   margin-right: 10px;
 }
 

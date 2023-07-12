@@ -40,6 +40,7 @@ class Routing
             }
         } // Si il y une erreur quelque part, on la récupère dans le bloc catch
         catch (Exception $e) {
+            // var_dump($e);
             // On récupére le message d'erreur pour le stocker dans $errorMessage
             $errorMessage = $e->getMessage();
             // On divise le message pour récupérer le code erreur et la description à part

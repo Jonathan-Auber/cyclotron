@@ -2,8 +2,6 @@
 
 namespace utils;
 
-use Exception;
-
 class Session
 {
     public function __construct()
@@ -13,9 +11,10 @@ class Session
         }
     }
 
-    public function setSession(int $userId, string $userStatus): void
+    public function setSession(int $userId, string $username, string $userStatus): void
     {
         $_SESSION['id'] = $userId;
+        $_SESSION['username'] = $username;
         $_SESSION['status'] = $userStatus;
         $_SESSION['flash_message'] = null;
     }
@@ -30,16 +29,25 @@ class Session
         if (isset($_SESSION['id'])) {
             return TRUE;
         } else {
-            $this->setFlashMessage("Vous n'êtes pas connecté !");
+            header('Location: /cyclotron');
         }
     }
 
     public function isAdmin()
     {
-        if ($_SESSION['status'] === "boss") {
+        if ($_SESSION['status'] === "1") {
             return TRUE;
         } else {
-            $this->setFlashMessage("Vous n'avez pas les droit pour accéder à cette page !");
+            header('Location: /cyclotron');
+        }
+    }
+
+    public function isSeller()
+    {
+        if ($_SESSION["status"] === "2") {
+            return TRUE;
+        } else {
+            header("Location: /cyclotron");
         }
     }
 

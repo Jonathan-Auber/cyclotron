@@ -28,18 +28,22 @@ class CustomersController extends Controller
     public function customerManagement(?int $customerId = null)
     {
         $this->session->isConnected();
+
         if ($customerId) {
             $customer = $this->model->find($customerId);
-            $pageTitle = "Editer un client";
+
+            $pageTitle = "Edition un client";
             Render::render("customerManagement", compact("pageTitle", "customer"));
         } else {
-            $pageTitle = "Ajout client";
+            $pageTitle = "Création client";
             Render::render("customerManagement", compact("pageTitle"));
         }
     }
 
     public function createOrUpdateCustomer(?int $customerId = null)
     {
+        $this->session->isConnected();
+
         if ($customerId) {
             $this->model->updateCustomer($customerId);
             $pageTitle = "Fichier client";
@@ -48,14 +52,17 @@ class CustomersController extends Controller
             $pageTitle = "Fichier client";
         }
         $customers = $this->model->findAll();
+
         header("Location:/cyclotron/Customers/displayCustomers");
     }
 
     public function invoiceByCustomer(int $customerId)
     {
         $this->session->isConnected();
+
         $customer = $this->model->find($customerId);
         $invoiceData = $this->invoice->invoiceData($customerId);
+
         $pageTitle = "Liste des factures client";
         Render::render("invoiceByCustomer", compact("pageTitle", "customer", "invoiceData"));
     }
