@@ -1,0 +1,28 @@
+<h1>Gestion des employés</h1>
+
+<main id="employees-management">
+    <form action="/cyclotron/Users/createOrUpdateEmployee/<?php if (isset($employee)) echo $employee['id']; ?>" method="POST">
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Nom de l'employé</label>
+            <input required type="text" class="form-control" id="username" name="username" value="<?php if (isset($employee)) echo $employee['name'] ?>">
+        </div>
+        <div class="mb-3">
+            <label for="user_password" class="form-label">Mot de passe</label>
+            <input required type="text" class="form-control" id="user_password" name="user_password" value="<?php if (isset($password)) echo $password ?>">
+        </div>
+        <div class="text-center m-5"><a href="/cyclotron/Users/generatePassword/<?php if (isset($employee)) echo $employee['id']; ?>" class="btn btn-danger">Générer un mot de passe fort</a></div>
+        <div class="mb-3">
+            <select required class="form-select" name="employee_status">
+                <option selected>Status de l'employé</option>
+                <option value="1">Administrateur</option>
+                <option value="2">Employé</option>
+                <option value="3">Apprenti</option>
+                <option value="4">Stagiaire</option>
+            </select>
+        </div>
+
+
+        <div class="text-center m-5"><button type="submit" class="btn btn-primary">Valider</button></div>
+    </form>
+</main>

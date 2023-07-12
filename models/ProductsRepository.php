@@ -41,8 +41,9 @@ class ProductsRepository extends Model
                 'stock_alert' => $data[3],
                 'price_ht' => $data[4]
             ]);
+            $this->session->setFlashMessage("Mise à jour du produit effectuée !");
         } else {
-            throw new Exception("400 : Le remplissage des champs comporte une erreur !");
+            $this->session->setFlashMessage("Une erreur s'est produite, la demande n'a pas aboutie !");
         }
     }
 
@@ -63,13 +64,16 @@ class ProductsRepository extends Model
         return $query->fetch();
     }
 
+    /**
+     * Retrieves the products that have stock levels below or equal to the stock alert threshold.
+     *
+     * @return array Returns an array containing the products with low stock.
+     */
     public function getAlert()
     {
-        $query = $this->pdo->prepare("SELECT * FROM products WHERE stock <= stock_alert");
+        $query = $this->pdo->prepare("SELECT name, stock FROM products WHERE stock <= stock_alert");
         $query->execute();
         return $query->fetchAll();
-
-        // return compact("alert");
     }
 
     /**

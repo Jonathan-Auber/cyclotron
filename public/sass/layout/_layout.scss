@@ -4,14 +4,16 @@
   width: 85vw;
   min-height: 100vh;
   margin-left: auto;
-  padding: 2rem;
+  padding: 2em;
 }
 
 h1 {
   width: 100%;
-  font-size: 32px;
+  padding: 1em;
+  font-size: 22px;
+  border-bottom: solid 0.5px $primary-color;
 }
 
 main {
-  padding: 2rem;
+  padding: 2em;
 }

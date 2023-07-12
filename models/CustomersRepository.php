@@ -2,8 +2,6 @@
 
 namespace models;
 
-use Exception;
-
 class CustomersRepository extends Model
 {
     protected string $table = "customers";
@@ -29,8 +27,9 @@ class CustomersRepository extends Model
                 'email' => $data[6],
                 'phoneNumber' => $data[7]
             ]);
+            $this->session->setFlashMessage("Création de la fiche effectué !");
         } else {
-            throw new Exception("400 : Le remplissage des champs comporte une erreur !");
+            $this->session->setFlashMessage("Une erreur s'est produite, la demande n'a pas aboutie !");
         }
     }
 
@@ -62,8 +61,9 @@ class CustomersRepository extends Model
                 'email' => $data[6],
                 'phoneNumber' => $data[7]
             ]);
+            $this->session->setFlashMessage("Mise à jour effectuée !");
         } else {
-            throw new Exception("400 : Le remplissage des champs comporte une erreur !");
+            $this->session->setFlashMessage("Une erreur s'est produite, la demande n'a pas aboutie !");
         }
     }
 

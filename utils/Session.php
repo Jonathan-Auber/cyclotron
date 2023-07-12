@@ -17,6 +17,12 @@ class Session
     {
         $_SESSION['id'] = $userId;
         $_SESSION['status'] = $userStatus;
+        $_SESSION['flash_message'] = null;
+    }
+
+    public function setFlashMessage($message)
+    {
+        $_SESSION['flash_message'] = $message;
     }
 
     public function isConnected()
@@ -24,7 +30,7 @@ class Session
         if (isset($_SESSION['id'])) {
             return TRUE;
         } else {
-            throw new Exception("401 : Vous n'êtes pas connecté !");
+            $this->setFlashMessage("Vous n'êtes pas connecté !");
         }
     }
 
@@ -33,7 +39,7 @@ class Session
         if ($_SESSION['status'] === "boss") {
             return TRUE;
         } else {
-            throw new Exception("403 : Vous n'avez pas les droits pour accéder à cette page");
+            $this->setFlashMessage("Vous n'avez pas les droit pour accéder à cette page !");
         }
     }
 

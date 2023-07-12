@@ -1,11 +1,6 @@
 /* Index */
-.index__header {
-  & h1 {
-    text-align: center;
-  }
-}
 
-.index__main {
+.index {
   min-height: 70vh;
   display: flex;
   flex-direction: column;

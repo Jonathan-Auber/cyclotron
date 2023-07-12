@@ -110,4 +110,25 @@ class ReportingRepository extends Model
 
         return compact("resultByMonth", "resultByYear");
     }
+
+    /**
+     * Retrieves the top 3 sellers based on their total sales amount for the current month.
+     *
+     * @return array Returns an array containing the usernames and total sales amounts of the top sellers.
+     */
+    public function sellerRanking()
+    {
+        $query = $this->pdo->prepare("SELECT u.username, 
+        SUM(i.amount_et) AS total
+        FROM invoices i
+        JOIN users u ON u.id = i.user_id
+        WHERE YEAR(i.creation_date) = YEAR(NOW()) 
+        AND MONTH(i.creation_date) = MONTH(NOW())
+        GROUP BY u.username 
+        ORDER BY total DESC
+        LIMIT 3");
+
+        $query->execute();
+        return $query->fetchAll();
+    }
 }

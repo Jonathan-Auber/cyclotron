@@ -16,12 +16,12 @@ class ProductsController extends Controller
         Render::render("stock", compact('pageTitle', 'products'));
     }
 
-    public function formProduct(int $productId)
+    public function productsManagement(int $productId)
     {
         $this->session->isAdmin();
         $pageTitle = "Edition des stock";
         $product = $this->model->find($productId);
-        Render::render("formProducts", compact("pageTitle", "product"));
+        Render::render("productsManagement", compact("pageTitle", "product"));
     }
 
     public function updateProduct(int $productId)

@@ -3,15 +3,18 @@
 namespace models;
 
 use PDO;
+use utils\Session;
 
 abstract class Model
 {
     protected PDO $pdo;
+    protected Session $session;
     protected string $table;
 
     public function __construct()
     {
         $this->pdo = \config\Database::getpdo();
+        $this->session = new Session();
     }
 
     public function find(int $id)

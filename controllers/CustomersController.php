@@ -25,11 +25,11 @@ class CustomersController extends Controller
         Render::render("customers", compact("pageTitle", "customers"));
     }
 
-    public function customerManagement(?int $id = null)
+    public function customerManagement(?int $customerId = null)
     {
         $this->session->isConnected();
-        if ($id) {
-            $customer = $this->model->find($id);
+        if ($customerId) {
+            $customer = $this->model->find($customerId);
             $pageTitle = "Editer un client";
             Render::render("customerManagement", compact("pageTitle", "customer"));
         } else {
@@ -38,7 +38,7 @@ class CustomersController extends Controller
         }
     }
 
-    public function createOrUpadateCustomer(?int $customerId = null)
+    public function createOrUpdateCustomer(?int $customerId = null)
     {
         if ($customerId) {
             $this->model->updateCustomer($customerId);

@@ -4,11 +4,13 @@ namespace controllers;
 
 use models\ProductsRepository;
 use models\ReportingRepository;
+use utils\MyFunctions;
 use utils\Render;
 
 class UsersController extends Controller
 {
     protected $modelName = \models\UsersRepository::class;
+    protected MyFunctions $functions;
     protected $product;
     protected $reporting;
 
@@ -17,15 +19,14 @@ class UsersController extends Controller
         parent::__construct();
         $this->reporting = new ReportingRepository();
         $this->product = new ProductsRepository();
+        $this->functions = new MyFunctions();
     }
 
 
     public function index()
     {
-        if (isset($_SESSION['id'], $_SESSION["status"]) && $_SESSION['status'] === "boss") {
-            $this->adminDashboard();
-        } elseif (isset($_SESSION['id'], $_SESSION["status"]) && $_SESSION['status'] === "seller") {
-            $this->sellerDashboard();
+        if (isset($_SESSION['id'], $_SESSION["status"])) {
+            $this->dashboard();
         } else {
             $pageTitle = "Login";
             $indexTitle = "Espace de connexion";
@@ -33,23 +34,20 @@ class UsersController extends Controller
         }
     }
 
-    public function adminDashboard()
+    public function dashboard()
     {
         $alerts = $this->product->getAlert();
+        $employees = $this->reporting->sellerRanking();
+        $yearRevenues = $this->reporting->salesBy("YEAR");
+        $monthRevenues = $this->reporting->salesBy("MONTH");
         $pageTitle = "Dashboard";
-        Render::render("adminDashboard", compact("pageTitle", "alerts"));
-    }
-
-    public function sellerDashboard()
-    {
-        $pageTitle = "Dashboard";
-        Render::render("sellerDashboardDashboard", compact("pageTitle"));
+        Render::render("dashboard", compact("pageTitle", "alerts", "employees", "yearRevenues", "monthRevenues"));
     }
 
     public function chartsView()
     {
         if (isset($_SESSION['id'], $_SESSION["status"]) && $_SESSION['status'] === "boss") {
-            $this->adminView();
+            $this->adminReporting();
         } elseif (isset($_SESSION['id'], $_SESSION["status"]) && $_SESSION['status'] === "seller") {
             $this->sellerView();
         }
@@ -71,7 +69,7 @@ class UsersController extends Controller
         Render::render("sellerView", compact("pageTitle", "monthSales", "totalByMonth", "yearSales", "totalByYear"));
     }
 
-    public function adminView()
+    public function adminReporting()
     {
         $salesByDay = $this->reporting->salesBy("DATE");
         extract($salesByDay);
@@ -87,16 +85,54 @@ class UsersController extends Controller
         extract($productByMonthWithVAT);
         $productData = $results;
 
-        $pageTitle = "Admin";
-        Render::render("adminView", compact("pageTitle", "daySales", "totalByDay", "yearSales", "totalByYear", "productData", "productsVAT", "totalVAT"));
+        $pageTitle = "Reporting";
+        Render::render("adminReporting", compact("pageTitle", "daySales", "totalByDay", "yearSales", "totalByYear", "productData", "productsVAT", "totalVAT"));
     }
 
-    public function salesView()
+    public function displayEmployees()
     {
         $this->session->isAdmin();
         $users = $this->model->findAll();
         $pageTitle = "Ventes des vendeurs";
-        Render::render("salesView", compact("pageTitle", "users"));
+        Render::render("employees", compact("pageTitle", "users"));
+    }
+
+    public function generatePassword(?int $employeeId = null)
+    {
+        $password = $this->functions->generatePassword();
+        $this->session->setFlashMessage("Le mot de passe a bien été générer, n'oubliez pas de le noter dans un endroit sûr !");
+        $this->employeesManagement($employeeId, $password);
+    }
+
+    public function employeesManagement(?int $employeeId = null, ?string $password = null)
+    {
+        $this->session->isAdmin();
+        if ($employeeId) {
+            $employee = $this->model->find($employeeId);
+            $pageTitle = "Editer un employé";
+            Render::render("employeesManagement", compact("pageTitle", "employee"));
+        } else {
+            $pageTitle = "Créer un nouvel employé";
+            Render::render("employeesManagement", compact("pageTitle", "password"));
+        }
+    }
+
+
+
+    public function createOrUpdateEmployee(?int $employeeId = null)
+    {
+        var_dump($_POST);
+        var_dump($_POST["employee_status"]);
+
+        // if ($employeeId) {
+        //     $this->model->updateCustomer($employeeId);
+        // } else {
+        $this->model->insertEmployee();
+        // }
+        // $employees = $this->model->findAll();
+        // header("Location:/cyclotron/Users/employeesManagement");
+
+        header("Location:/cyclotron/Users/displayEmployees");
     }
 
     public function salesBySeller(int $userId)
@@ -118,9 +154,6 @@ class UsersController extends Controller
     public function logout()
     {
         $this->model->logout();
-        $pageTitle = "Déconnexion";
-        $errorCode = "200";
-        $errorDescription = "Vous êtes bien déconnecté";
-        Render::render("error", compact("errorCode", "errorDescription", "pageTitle"));
+        header("Location: /cyclotron");
     }
 }

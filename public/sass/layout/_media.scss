@@ -1,4 +1,11 @@
 @media screen and (max-width: 1349px) {
+  #link-container .tablet-hide {
+    display: none;
+  }
+
+  .tablet-hide {
+    display: none;
+  }
   /* Layout */
   #wrap {
     width: 100vw;
@@ -148,4 +155,31 @@
     -ms-transform: translateX(0%);
     -o-transform: translateX(0%);
   }
+}
+
+@media screen and (max-width: 767px) {
+  #link-container .mobile-hide {
+    display: none;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  #wrap {
+    padding: 0.5em;
+  }
+  main {
+    padding: 0.5em;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  // #dashboard {
+  //   & .dashboard-section {
+  //     width: 100%;
+  //   }
+  // }
 }

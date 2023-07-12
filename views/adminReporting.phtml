@@ -1,0 +1,99 @@
+<h1>Chiffre d'affaire de l'entreprise</h1>
+<main id="admin-reporting">
+    <table class="table p-3">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Produit</th>
+                <th scope="col" class="text-end">Chiffre d'affaire du jour</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <?php
+            $i = 1;
+            foreach ($daySales as $product) { ?>
+                <tr>
+                    <th scope="row"><?= $i ?></th>
+                    <td><?= $product['name'] ?></td>
+                    <td class="text-end"><?= $product['total_price'] ?> €</td>
+                </tr>
+            <?php $i++;
+            } ?>
+            <tr>
+                <th scope="row" class=" fs-5">Total</th>
+                <td></td>
+                <!-- Dire d'ou vient la variable -->
+                <td class="text-end fw-bold fst-italic fs-5"><?= $totalByDay ?> €</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table p-3 mt-5">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Produit</th>
+                <th scope="col" class="text-end">Chiffre d'affaire de l'année en cours</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <?php
+            $i = 1;
+            foreach ($yearSales as $product) { ?>
+                <tr>
+                    <th scope="row"><?= $i ?></th>
+                    <td><?= $product['name'] ?></td>
+                    <td class="text-end"><?= $product['total_price'] ?> €</td>
+                </tr>
+            <?php $i++;
+            } ?>
+            <tr>
+                <th scope="row" class=" fs-5">Total</th>
+                <td></td>
+                <td class="text-end fw-bold fst-italic fs-5"><?= $totalByYear ?> €</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table p-3 mt-5">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Produit</th>
+                <th scope="col">Mois</th>
+                <th scope="col" class="text-end">Chiffre d'affaire par produit</th>
+                <th scope="col" class="text-end">TVA</th>
+
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <?php
+            $i = 1;
+            foreach ($productData as $key => $product) {
+                if (isset($productsVAT[$key])) {
+                    $productVAT = $productsVAT[$key];
+            ?>
+                    <tr>
+                        <th scope="row"><?= $i ?></th>
+                        <td><?= $product['name'] ?></td>
+                        <td><?= $product['month'] ?></td>
+                        <td class="text-end"><?= $product['total_price'] ?> €</td>
+                        <td class="text-end"><?= $productVAT['VAT'] ?> €</td>
+                    </tr>
+            <?php
+                    $i++;
+                }
+            }
+            ?>
+
+            <tr>
+                <th scope="row" class=" fs-5">Total</th>
+                <td></td>
+                <td class="text-end"></td>
+                <td class="text-end fw-bold fst-italic fs-5"><?= $totalByYear ?> €</td>
+                <td class="text-end fw-bold fst-italic fs-5"><?= $totalVAT ?> €</td>
+
+            </tr>
+        </tbody>
+    </table>
+</main>

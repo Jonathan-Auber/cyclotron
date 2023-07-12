@@ -1,16 +1,15 @@
-<header class="index__header">
-  <h1><?= $indexTitle ?></h1>
-</header>
-<main class="index__main">
+<h1><?= $indexTitle ?></h1>
+
+<main class="index">
   <form method="POST" action="/cyclotron/Users/login">
-    <div class="input-container">
-      <label class="input-container__label" for="username">Nom d'utilisateur :</label>
-      <input class="input-container__input" type="text" id="username" name="username">
+    <div class="mb-3">
+      <label class="form-label" for="username">Nom d'utilisateur :</label>
+      <input required class="form-control" type="text" id="username" name="username">
     </div>
-    <div class="input-container">
-      <label class="input-container__label" for="password">Mots de passe :</label>
-      <input class="input-container__input" type="password" id="password" name="password">
+    <div class="mb-3">
+      <label class="form-label" for="password">Mots de passe :</label>
+      <input required class="form-control" type="password" id="password" name="password">
     </div>
-    <div class="btn-container"><button class="button" type="submit" name="submitLogin">Valider</button></div>
+    <div class="text-center m-5"><button class="btn btn-primary" type="submit" name="submitLogin">Valider</button></div>
   </form>
 </main>
