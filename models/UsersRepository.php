@@ -2,8 +2,9 @@
 
 namespace models;
 
-use utils\MyFunctions;
 use utils\Render;
+use utils\MyFunctions;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class UsersRepository extends Model
 {
@@ -89,18 +90,22 @@ class UsersRepository extends Model
                     } else {
                         $this->session->setFlashMessage("Veuillez sélectionner un statut pour votre employé !");
                         Render::render("employeesManagement");
+                        exit;
                     }
                 } else {
                     $this->session->setFlashMessage("Cette adresse email existe déjà !");
                     Render::render("employeesManagement");
+                    exit;
                 }
             } else {
                 $this->session->setFlashMessage("Veuillez saisir une adresse email valide !");
                 Render::render("employeesManagement");
+                exit;
             }
         } else {
             $this->session->setFlashMessage("Veuillez saisir un nom d'utilisateur !");
             Render::render("employeesManagement");
+            exit;
         }
     }
 
