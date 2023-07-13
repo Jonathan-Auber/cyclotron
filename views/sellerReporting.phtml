@@ -1,55 +1,58 @@
-<h1 class="text-center mb-5">Voici vos chiffre en cours</h1>
-<table class="table p-3">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Produit</th>
-            <th scope="col" class="text-end">Chiffre d'affaire du mois en cours</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        <?php
-        $i = 1;
-        foreach ($monthSales as $product) { ?>
+<h1>Voici vos chiffre en cours</h1>
+
+<main id="seller-reporting" class="mobile-hide">
+    <table class="table p-3">
+        <thead>
             <tr>
-                <th scope="row"><?= $i ?></th>
-                <td><?= $product['name'] ?></td>
-                <td class="text-end"><?= $product['total_price'] ?> €</td>
+                <th scope="col">#</th>
+                <th scope="col">Produit</th>
+                <th scope="col" class="text-end">Chiffre d'affaire du mois en cours</th>
             </tr>
-        <?php $i++;
-        } ?>
-        <tr>
-            <th scope="row" class=" fs-5">Total</th>
-            <td></td>
-            <td class="text-end fw-bold fst-italic fs-5"><?= $totalByMonth ?> €</td>
-        </tr>
-    </tbody>
-</table>
+        </thead>
+        <tbody class="table-group-divider">
+            <?php
+            $i = 1;
+            foreach ($monthSales as $product) { ?>
+                <tr>
+                    <th scope="row"><?= $i ?></th>
+                    <td><?= $product['name'] ?></td>
+                    <td class="text-end"><?= $product['total_price'] ?> €</td>
+                </tr>
+            <?php $i++;
+            } ?>
+            <tr>
+                <th scope="row" class=" fs-5">Total</th>
+                <td></td>
+                <td class="text-end fw-bold fst-italic fs-5"><?= $totalByMonth ?> €</td>
+            </tr>
+        </tbody>
+    </table>
 
 
-<table class="table p-3 mt-5">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Produit</th>
-            <th scope="col" class="text-end">Chiffre d'affaire de l'année en cours</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        <?php
-        $i = 1;
-        foreach ($yearSales as $product) { ?>
+    <table class="table p-3 mt-5">
+        <thead>
             <tr>
-                <th scope="row"><?= $i ?></th>
-                <td><?= $product['name'] ?></td>
-                <td class="text-end"><?= $product['total_price'] ?> €</td>
+                <th scope="col">#</th>
+                <th scope="col">Produit</th>
+                <th scope="col" class="text-end">Chiffre d'affaire de l'année en cours</th>
             </tr>
-        <?php $i++;
-        } ?>
-        <tr>
-            <th scope="row" class=" fs-5">Total</th>
-            <td></td>
-            <td class="text-end fw-bold fst-italic fs-5"><?= $totalByYear ?> €</td>
-        </tr>
-    </tbody>
-</table>
+        </thead>
+        <tbody class="table-group-divider">
+            <?php
+            $i = 1;
+            foreach ($yearSales as $product) { ?>
+                <tr>
+                    <th scope="row"><?= $i ?></th>
+                    <td><?= $product['name'] ?></td>
+                    <td class="text-end"><?= $product['total_price'] ?> €</td>
+                </tr>
+            <?php $i++;
+            } ?>
+            <tr>
+                <th scope="row" class=" fs-5">Total</th>
+                <td></td>
+                <td class="text-end fw-bold fst-italic fs-5"><?= $totalByYear ?> €</td>
+            </tr>
+        </tbody>
+    </table>
+</main>

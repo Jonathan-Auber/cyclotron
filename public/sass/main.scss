@@ -2,7 +2,7 @@
 @import "./base/typography";
 @import "./base/animations";
 @import "./utils/variables";
-@import "./components/buttons";
+// @import "./components/buttons";
 @import "./components/flashContainer";
 @import "./components/dashboardCard";
 @import "./layout/layout.scss";
@@ -11,7 +11,7 @@
 @import "./pages/index.scss";
 @import "./pages/dashboard.scss";
 @import "./pages/stock.scss";
-
+@import "./pages/error";
 // @import "./pages/reporting.scss";
 
 @import "./pages/error";

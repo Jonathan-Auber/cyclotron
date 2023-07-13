@@ -1,28 +1,30 @@
-<p class=text-center>Factures de <?= $customer['firstname'] . " " . $customer['lastname'] ?></p>
+<h1>Factures de <?= $customer['firstname'] . " " . $customer['lastname'] ?></h1>
 
-<table class="table">
-    <thead>
-        <tr class="align-middle">
-            <th scope="col">#</th>
-            <th scope="col">Date</th>
-            <th scope="col">Montant</th>
-            <th scope="col">Montant Total</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $i = 1;
-        foreach ($invoiceData as $invoice) : ?>
+<main id="customers-invoices" class="mobile-hide">
+    <table class="table">
+        <thead>
             <tr class="align-middle">
-                <th scope="row"><?= $i ?></th>
-                <td><?= $invoice['creation_date'] ?></td>
-                <td><?= $invoice['amount_et'] ?>€</td>
-                <td><?= $invoice['amount_it'] ?>€</td>
-                <td class="text-end"><a href="/cyclotron/Invoice/displayInvoice/<?= $invoice['id'] ?>" type="button" class="btn btn-primary w-100">Voir la facture</button></td>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Montant Total</th>
+                <th scope="col"></th>
             </tr>
-        <?php
-            $i++;
-        endforeach; ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <?php
+            $i = 1;
+            foreach ($invoiceData as $invoice) : ?>
+                <tr class="align-middle">
+                    <th scope="row"><?= $i ?></th>
+                    <td><?= $invoice['creation_date'] ?></td>
+                    <td><?= $invoice['amount_et'] ?>€</td>
+                    <td><?= $invoice['amount_it'] ?>€</td>
+                    <td class="text-end"><a href="/cyclotron/Invoice/displayInvoice/<?= $invoice['id'] ?>" type="button" class="btn btn-primary w-100">Voir la facture</button></td>
+                </tr>
+            <?php
+                $i++;
+            endforeach; ?>
+        </tbody>
+    </table>
+</main>
