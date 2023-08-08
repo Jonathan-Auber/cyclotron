@@ -4,6 +4,7 @@ namespace models;
 
 use models\ProductsRepository;
 use Exception;
+use utils\Render;
 
 class InvoiceRepository extends Model
 {
@@ -54,14 +55,17 @@ class InvoiceRepository extends Model
         ProductsRepository $productRepository
     ) {
         foreach ($results as $result) {
-            if (isset($result["productId"], $result["numberOfProducts"])) {
+            if (isset($result["productId"], $result["numberOfProducts"]) && is_int($result["productId"])) {
                 $product = $productRepository->find($result["productId"]);
                 if ($product['stock'] >= 0 && $product['stock'] > $result["numberOfProducts"]) {
                 } else {
-                    throw new Exception("401 : Il n'y à pas assez de stock pour " . $product['name']);
+                    // throw new Exception("401 : Il n'y à pas assez de stock pour " . $product['name']);
+                    $this->session->setFlashMessage("Il n'y à pas assez de stock pour " . $product['name']);
                 }
             } else {
-                throw new Exception("400 : L'un des champs n'est pas remplis");
+                $this->session->setFlashMessage("L'un des champs n'est pas remplis !");
+                header("Location: /cyclotron/Invoice/createInvoice/" . $customerId);
+                exit;
             }
         }
 

@@ -40,13 +40,16 @@ class Routing
             }
         } // Si il y une erreur quelque part, on la récupère dans le bloc catch
         catch (Exception $e) {
-            // var_dump($e);
             // On récupére le message d'erreur pour le stocker dans $errorMessage
             $errorMessage = $e->getMessage();
             // On divise le message pour récupérer le code erreur et la description à part
             $parts = explode(': ', $errorMessage);
             $errorCode = $parts[0];
-            $errorDescription = $parts[1];
+            if (isset($part[1])) {
+                $errorDescription = $parts[1];
+            } else {
+                $errorDescription = "";
+            }
             $pageTitle = "Page d'erreur";
             // On affiche l'erreur sur la page d'erreur
             Render::render("error", compact("errorCode", "errorDescription", "pageTitle"));

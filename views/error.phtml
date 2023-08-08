@@ -1,4 +1,6 @@
-<main class="error-container">
-    <h1 class="error-container__code"><?= $errorCode ?></h1>
-    <p class="error-container__description"><?= $errorDescription ?></p>
+<h1 class="error-container__code"><?= $errorCode ?></h1>
+
+<main class="error-container d-flex flex-column align-items-center">
+    <p class="error-container__description mt-5"><?= $errorDescription ?></p>
+    <a class="btn btn-primary mt-5 p-3" href="/cyclotron">Retourner à l'accueil</a>
 </main>

@@ -7,7 +7,7 @@
                 <th class="tablet-hide" scope="col">#</th>
                 <th scope="col">Produit</th>
                 <th scope="col" class="tablet-hide">Référence</th>
-                <th scope="col" class="mobile-hide">Stock</th>
+                <th scope="col">Stock</th>
                 <th scope="col" class="mobile-hide">Prix</th>
                 <?php if (isset($_SESSION['status']) && $_SESSION['status'] === '1') { ?><th scope="col"></th> <?php } ?>
             </tr>
@@ -20,7 +20,7 @@
                     <th class="tablet-hide" scope="row"><?= $i ?></th>
                     <td><?= $product['name'] ?></td>
                     <td class="tablet-hide"><?= $product['reference'] ?></td>
-                    <td class="mobile-hide"><?= $product['stock'] ?></td>
+                    <td><?= $product['stock'] ?></td>
                     <td class="mobile-hide"><?= $product['price_ht'] ?></td>
                     <?php if (isset($_SESSION['status']) && $_SESSION['status'] === '1') { ?> <td class="text-end"><a href="/cyclotron/Products/productsManagement/<?= $product['id'] ?>" type="button" class="btn btn-primary w-auto">Modifier</button></td> <?php } ?>
                 </tr>

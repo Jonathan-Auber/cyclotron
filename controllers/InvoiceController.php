@@ -38,6 +38,13 @@ class InvoiceController extends Controller
     {
         $this->session->isConnected();
 
+        // foreach ($_POST as $data) {
+        //     if (!isset($data)) {
+        //         $this->session->setFlashMessage("Les champs ne sont pas remplis !");
+        //         header("Location: Invoice/createInvoice/" . $customerId);
+        //     }
+        // }
+
         $results = $this->model->postDataProcessing($_POST);
         $productRepository = $this->product;
         $invoiceId = $this->model->insertInvoice($customerId, $results, $productRepository);
