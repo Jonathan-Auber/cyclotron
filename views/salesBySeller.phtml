@@ -1,25 +1,29 @@
 <h1 class="text-center">Chiffre d'affaire réalisé par : <?= $user['username'] ?></h1>
-<table class="table p-3 mt-5 mx-auto w-50">
-    <thead>
-        <tr>
-            <th scope="col">Mois</th>
-            <th scope="col" class="text-end">Total</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        <?php
-        foreach ($resultByMonth as $result) {
-        ?>
+<p class="mobile-message">Cette page n'est pas accessible depuis votre appareil, veuillez retourner à <a href="/cyclotron">l'accueil</a>.</p>
+
+<main class="mobile-hide">
+    <table class="table p-3 mt-5 mx-auto w-50">
+        <thead>
             <tr>
-                <td><?= $result['month'] ?></td>
-                <td class="text-end"><?= $result['total'] ?> €</td>
+                <th scope="col">Mois</th>
+                <th scope="col" class="text-end">Total</th>
             </tr>
-        <?php } ?>
+        </thead>
+        <tbody class="table-group-divider">
+            <?php
+            foreach ($resultByMonth as $result) {
+            ?>
+                <tr>
+                    <td><?= $result['month'] ?></td>
+                    <td class="text-end"><?= $result['total'] ?> €</td>
+                </tr>
+            <?php } ?>
 
-        <tr>
-            <th scope="row" class="fs-5">Total</th>
-            <td class=" text-end fw-bold fst-italic fs-5"><?= $resultByYear ?> €</td>
+            <tr>
+                <th scope="row" class="fs-5">Total</th>
+                <td class=" text-end fw-bold fst-italic fs-5"><?= $resultByYear ?> €</td>
 
-        </tr>
-    </tbody>
-</table>
+            </tr>
+        </tbody>
+    </table>
+</main>

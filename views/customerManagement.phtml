@@ -1,6 +1,7 @@
 <h1 class="text-center">Formulaire de gestion client</h1>
+<p class="mobile-message">Cette page n'est pas accessible depuis votre appareil, veuillez retourner à <a href="/cyclotron">l'accueil</a>.</p>
 
-<main id="customer-management">
+<main id="customer-management" class="mobile-hide">
     <form action="/cyclotron/Customers/createOrUpdateCustomer/<?php if (isset($customer)) echo $customer['id']; ?>" method="POST">
 
         <div class="mb-3">
