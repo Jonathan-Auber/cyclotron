@@ -74,7 +74,7 @@ class UsersRepository extends Model
                             "status" => $status,
                         ]);
 
-                        $this->session->setFlashMessage("Nouvel employé ajouté, veuillez noter le mot de passe : " . $password . " !");
+                        $this->session->setFlashMessage("Nouvel employé ajouté, veuillez noter le mot de passe : " . $password);
 
                         // Envoyer un mail
                         // $phpmailer = new PHPMailer();

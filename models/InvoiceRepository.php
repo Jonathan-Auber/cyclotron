@@ -58,7 +58,9 @@ class InvoiceRepository extends Model
                 $product = $productRepository->find($result["productId"]);
                 if ($product['stock'] >= 0 && $product['stock'] > $result["numberOfProducts"]) {
                 } else {
-                    throw new Exception("401 : Il n'y à pas assez de stock pour " . $product['name']);
+                    $this->session->setFlashMessage("Il n'y a pas assez de stock pour " . $product['name']);
+                    header("Location: /cyclotron/Invoice/createInvoice/" . $customerId);
+                    return;
                 }
             } else {
                 throw new Exception("400 : L'un des champs n'est pas remplis");
@@ -97,10 +99,28 @@ class InvoiceRepository extends Model
         ]);
     }
 
-    public function postDataProcessing()
+    /**
+     * Process and retrieve data from the POST request related to products and their quantities.
+     *
+     * This function processes the data sent via POST request to extract product IDs and corresponding quantities.
+     * It constructs an array containing product information based on the received data.
+     *
+     * @return array Returns an array containing product information with 'productId' and 'numberOfProducts'.
+     */
+    public function postDataProcessing($customerId)
     {
         $result = [];
         for ($i = 1; $i <= count($_POST) / 2; $i++) {
+            if ($_POST["product_$i"] === "Selectionnez un produit") {
+                $this->session->setFlashMessage("Vous n'avez pas sélectionné de produit en ligne " . $i);
+                header("Location: /cyclotron/Invoice/createInvoice/" . $customerId);
+                return;
+            }
+            if (intval($_POST["numberOfProducts_$i"]) === 0) {
+                $this->session->setFlashMessage("Vous n'avez pas indiqué de quantité pour le produit en ligne " . $i);
+                header("Location: /cyclotron/Invoice/createInvoice/" . $customerId);
+                return;
+            }
             $result[] = [
                 'productId' => $_POST["product_$i"],
                 'numberOfProducts' => $_POST["numberOfProducts_$i"]
@@ -160,9 +180,9 @@ class InvoiceRepository extends Model
         SET invoice_id = :invoiceId, product_id = :productId, quantity = :quantity");
         foreach ($results as $line) {
             $query->execute([
-                'invoiceId' => $invoiceId,
-                'productId' => $line['productId'],
-                'quantity' => $line['numberOfProducts']
+                'invoiceId' => htmlspecialchars(intval($invoiceId)),
+                'productId' => htmlspecialchars($line['productId']),
+                'quantity' => htmlspecialchars(intval($line['numberOfProducts']))
             ]);
             $productRepository->updateStock($line['productId'], $line['numberOfProducts']);
         }

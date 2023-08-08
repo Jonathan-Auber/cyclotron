@@ -38,7 +38,7 @@ class InvoiceController extends Controller
     {
         $this->session->isConnected();
 
-        $results = $this->model->postDataProcessing($_POST);
+        $results = $this->model->postDataProcessing($customerId, $_POST);
         $productRepository = $this->product;
         $invoiceId = $this->model->insertInvoice($customerId, $results, $productRepository);
         $this->model->insertInvoiceLines($results, $invoiceId, $productRepository);
