@@ -17,7 +17,7 @@ class ReportingRepository extends Model
     /**
      * Retrieves sales by period and optionally by user.
      *
-     * @param string $period The period (SQL function) to group the sales by (e.g., "MONTH" or "YEAR").
+     * @param string $period The period to group the sales by (e.g., "MONTH" or "YEAR").
      * @param string|null $andUserId Optional additional clause for the SQL query.
      * @param int|null $userId The optional user ID to filter the sales by user.
      * @return array An associative array containing sales by product for the specified period and the total sales.
@@ -33,7 +33,7 @@ class ReportingRepository extends Model
 
         if ($userId) {
             $query->execute([
-                $userId
+                "userId" => $userId
             ]);
         } else {
             $query->execute();

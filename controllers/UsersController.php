@@ -61,12 +61,12 @@ class UsersController extends Controller
     {
         $this->session->isSeller();
 
-        $salesByMonth = $this->reporting->salesBy("MONTH", "AND i.user_id = ?", $_SESSION['id']);
+        $salesByMonth = $this->reporting->salesBy("MONTH", "AND i.user_id  = :userId", $_SESSION['id']);
         extract($salesByMonth);
         $monthSales = $period;
         $totalByMonth = $totalByPeriod;
 
-        $salesByYear = $this->reporting->salesBy("YEAR", "AND i.user_id = ?", $_SESSION['id']);
+        $salesByYear = $this->reporting->salesBy("YEAR", "AND i.user_id = :userId ", $_SESSION['id']);
         extract($salesByYear);
         $yearSales = $period;
         $totalByYear = $totalByPeriod;

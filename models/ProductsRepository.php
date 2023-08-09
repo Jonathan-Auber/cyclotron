@@ -17,7 +17,6 @@ class ProductsRepository extends Model
      * Updates a product with the specified ID.
      *
      * @param int $productId The ID of the product to update.
-     * @throws Exception if there is an error in filling the fields.
      * @return void
      */
     public function updateProduct(int $productId)

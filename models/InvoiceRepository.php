@@ -46,26 +46,34 @@ class InvoiceRepository extends Model
      * @param array $results An array of invoice line items.
      * @param ProductsRepository $productRepository The instance of ProductsRepository.
      * @return int The ID of the inserted invoice.
-     * @throws Exception if there is an error in filling the fields or insufficient stock.
      */
     public function insertInvoice(
         int $customerId,
         array $results,
         ProductsRepository $productRepository
     ) {
-        foreach ($results as $result) {
-            if (isset($result["productId"], $result["numberOfProducts"])) {
-                $product = $productRepository->find($result["productId"]);
-                if ($product['stock'] >= 0 && $product['stock'] > $result["numberOfProducts"]) {
+        if (!empty($results)) {
+            foreach ($results as $result) {
+                if (isset($result["productId"]) && $result["numberOfProducts"] > 0) {
+                    $product = $productRepository->find($result["productId"]);
+                    if ($product['stock'] >= 0 && $product['stock'] > $result["numberOfProducts"]) {
+                    } else {
+                        $this->session->setFlashMessage("Il n'y a pas assez de stock pour " . $product['name']);
+                        header("Location: /cyclotron/Invoice/createInvoice/" . $customerId);
+                        return;
+                    }
                 } else {
-                    $this->session->setFlashMessage("Il n'y a pas assez de stock pour " . $product['name']);
-                    header("Location: /cyclotron/Invoice/createInvoice/" . $customerId);
+                    $this->session->setFlashMessage("Un problème est survenu !");
+                    header("Location: /cyclotron");
                     return;
                 }
-            } else {
-                throw new Exception("400 : L'un des champs n'est pas remplis");
             }
+        } else {
+            $this->session->setFlashMessage("Un problème est survenu !");
+            header("Location: /cyclotron");
+            return;
         }
+
 
         $query = $this->pdo->prepare("INSERT INTO {$this->table} 
         SET customer_id = :customer, user_id = :user, amount_et = :excluded_tax, amount_it = :included_tax");
@@ -87,7 +95,7 @@ class InvoiceRepository extends Model
      * @param float $totalWithVat The total amount of the invoice including tax.
      * @return void
      */
-    public function updateInvoice($invoiceId, $totalInvoice, $totalWithVat)
+    public function updateInvoice(int $invoiceId, float $totalInvoice, float $totalWithVat)
     {
         $query = $this->pdo->prepare("UPDATE {$this->table} 
             SET amount_et = :excluded_tax, amount_it = :included_tax
@@ -107,7 +115,7 @@ class InvoiceRepository extends Model
      *
      * @return array Returns an array containing product information with 'productId' and 'numberOfProducts'.
      */
-    public function postDataProcessing($customerId)
+    public function postDataProcessing(int $customerId)
     {
         $result = [];
         for ($i = 1; $i <= count($_POST) / 2; $i++) {
@@ -130,10 +138,10 @@ class InvoiceRepository extends Model
     }
 
     /**
-     * Retrieves invoice line data for the specified invoice ID.
+     * Retrieves invoice lines data for the specified invoice ID.
      *
      * @param int $invoiceId The ID of the invoice.
-     * @return array An array containing the invoice line data.
+     * @return array An array containing the invoice lines data.
      */
     public function invoiceLinesData($invoiceId)
     {
@@ -143,9 +151,11 @@ class InvoiceRepository extends Model
         JOIN vat v ON p.vat_id = v.id 
         WHERE l.invoice_id = :invoiceId;
         ");
+
         $queryData->execute([
             'invoiceId' => $invoiceId
         ]);
+
         $invoiceData = $queryData->fetchAll();
 
         $invoiceLines = [];
@@ -158,11 +168,11 @@ class InvoiceRepository extends Model
                 'unit_price' => $line['price_ht'],
                 'total_price' => $line['quantity'] * $line['price_ht'],
             ];
-            $totalInvoice += intval($line['quantity'] * $line['price_ht']);
-            $totalInvoiceVat += intval((($line['quantity'] * $line['price_ht']) * $line['rate']) / 100);
+            $totalInvoice += floatval($line['quantity'] * $line['price_ht']);
+            $totalInvoiceVat += floatval((($line['quantity'] * $line['price_ht']) * $line['rate']) / 100);
         }
 
-        $totalWithVat = intval($totalInvoice) + intval($totalInvoiceVat);
+        $totalWithVat = floatval($totalInvoice) + floatval($totalInvoiceVat);
         return compact('invoiceLines', 'totalInvoice', 'totalInvoiceVat', 'totalWithVat');
     }
 

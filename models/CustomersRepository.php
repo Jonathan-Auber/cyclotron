@@ -37,7 +37,6 @@ class CustomersRepository extends Model
      * Updates an existing customer in the database.
      *
      * @param int $customerId The ID of the customer to update.
-     * @throws Exception if there is an error in filling the fields.
      */
     public function updateCustomer(int $customerId)
     {

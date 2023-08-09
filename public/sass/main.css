@@ -203,6 +203,20 @@ main {
   color: #8b4513;
 }
 
+.error-container {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.error-container__code {
+  margin: 1rem;
+}
+.error-container__description {
+  margin: 1rem;
+}
+
 @media screen and (max-width: 1349px) {
   #link-container .tablet-hide {
     display: none;

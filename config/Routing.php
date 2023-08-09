@@ -10,45 +10,60 @@ class Routing
 {
     public function get()
     {
-        // On essaie le bloc de code qui suit
+        // Trying the following code block
         try {
-            // Si il y a une valeur pour controller dans l'url alors ..
+            // If there is a value for 'controller' in the URL, then...
             if (isset($_GET['controller'])) {
-                // On se protège des injections de code
-                $url = htmlspecialchars($_GET['controller']); // Ex pour : https://pj/users/post
-                // On répartit l'url dans un tableau à l'aide de la méthode explode
+
+                // Protecting against code injections
+                $url = htmlspecialchars($_GET['controller']); // e.g : https://pj/users/post
+
+                // Splitting the URL into an array using the explode method
                 $newUrl = explode("/", $url); // [user, post]
-                $controllerName = "controllers\\" . ucfirst($newUrl[0] . "Controller"); // UsersController
-                // Si il y a une deuxième valeur dans l'url alors ..
+                $controllerName = "controllers\\" . ucfirst($newUrl[0] . "Controller"); // "UsersController"
+
+                // If there is a second value in the URL, then...
                 if (isset($newUrl[1])) {
-                    $methodName = strtolower($newUrl[1]); // post
+                    $methodName = strtolower($newUrl[1]); // "post"
+
+                    // Checking if the method exists in the controller
+                    if (!method_exists($controllerName, $methodName)) {
+                        throw new Exception("404 : Cette page n'existe pas");
+                    }
+
                     $controller = new $controllerName(); // new UsersController.php
                     if (isset($newUrl[2])) {
-                        $id = $newUrl[2];
-                        $controller->$methodName(intval($id)); // $controller->post(4);
+                        $id = intval($newUrl[2]);
+                        if ($id === 0) {
+                            throw new Exception("404 : Cette page n'existe pas");
+                        }
+                        $controller->$methodName($id); // $controller->post(4);
                     } else {
                         $controller->$methodName(); // $controller->post();
                     }
                 } else {
-                    // S'il manque un paramètre, la page n'existe pas, on renvois une erreur qui sera récupérée dans le bloc catch
+
+                    // If a parameter is missing, the page does not exist, throwing an error to be caught in the catch block
                     throw new Exception("404 : Cette page n'existe pas");
                 }
-            } // S'il n'y a pas de valeur pour controller, alors on affiche la page d'accueil
+            } // If there is no value for 'controller', then display the home page
             else {
                 $index = new UsersController();
                 $index->index();
             }
-        } // Si il y une erreur quelque part, on la récupère dans le bloc catch
+        } // If there's an error somewhere, it will be caught in the catch block
         catch (Exception $e) {
-            // var_dump($e);
-            // On récupére le message d'erreur pour le stocker dans $errorMessage
+
+            // Retrieving the error message to store in $errorMessage
             $errorMessage = $e->getMessage();
-            // On divise le message pour récupérer le code erreur et la description à part
+
+            // Splitting the message to extract the error code and description separately
             $parts = explode(': ', $errorMessage);
             $errorCode = $parts[0];
             $errorDescription = $parts[1];
             $pageTitle = "Page d'erreur";
-            // On affiche l'erreur sur la page d'erreur
+
+            // Displaying the error on the error page
             Render::render("error", compact("errorCode", "errorDescription", "pageTitle"));
         }
     }
