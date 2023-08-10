@@ -56,7 +56,7 @@ class InvoiceRepository extends Model
             foreach ($results as $result) {
                 if (isset($result["productId"]) && $result["numberOfProducts"] > 0) {
                     $product = $productRepository->find($result["productId"]);
-                    if ($product['stock'] >= 0 && $product['stock'] > $result["numberOfProducts"]) {
+                    if ($product['stock'] >= 0 && $product['stock'] >= $result["numberOfProducts"]) {
                     } else {
                         $this->session->setFlashMessage("Il n'y a pas assez de stock pour " . $product['name']);
                         header("Location: /cyclotron/Invoice/createInvoice/" . $customerId);
