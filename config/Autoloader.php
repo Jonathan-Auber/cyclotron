@@ -8,7 +8,7 @@ class Autoloader
             if (file_exists($classname . ".php")) {
                 require $classname . ".php";
             } else {
-                throw new Exception("404 : Cette page n'existe pas");
+                throw new Exception("404 : Cette page n'existe pas !");
             }
         });
     }

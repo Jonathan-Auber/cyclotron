@@ -2,8 +2,9 @@
 
 namespace models;
 
-use utils\MyFunctions;
 use utils\Render;
+use utils\MyFunctions;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class UsersRepository extends Model
 {
@@ -64,7 +65,6 @@ class UsersRepository extends Model
                     $status = htmlspecialchars(trim(intval($_POST["employee_status"])));
                     if ($status >= 1 && $status <= 2) {
                         $password = $this->function->generatePassword();
-                        $this->session->setFlashMessage("Bravo");
                         $securePassword = password_hash($password, PASSWORD_DEFAULT);
                         $query = $this->pdo->prepare("INSERT INTO {$this->table} SET email = :email, username = :username, password = :password, status = :status");
                         $query->execute([
@@ -74,17 +74,8 @@ class UsersRepository extends Model
                             "status" => $status,
                         ]);
 
-                        $this->session->setFlashMessage("Nouvel employé ajouté, veuillez noter le mot de passe : " . $password);
+                        // $this->session->setFlashMessage("Nouvel employé ajouté, veuillez noter le mot de passe : " . $password);
 
-                        // Envoyer un mail
-                        // $phpmailer = new PHPMailer();
-                        // $phpmailer->isSMTP();
-                        // $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
-                        // $phpmailer->SMTPAuth = true;
-                        // $phpmailer->Port = 2525;
-                        // $phpmailer->Username = '5921e62712de38';
-                        // $phpmailer->Password = 'd05529bcedef41';
-                        // Envoyer un mail
 
                     } else {
                         $this->session->setFlashMessage("Veuillez sélectionner un statut pour votre employé !");
