@@ -4,18 +4,20 @@ namespace models;
 
 use utils\Render;
 use utils\MyFunctions;
-use PHPMailer\PHPMailer\PHPMailer;
+use utils\Mailtrap;
 
 class UsersRepository extends Model
 {
     protected string $table = "users";
 
     protected MyFunctions $function;
+    protected Mailtrap $mailtrap;
 
     public function __construct()
     {
         parent::__construct();
         $this->function = new MyFunctions();
+        $this->mailtrap = new Mailtrap();
     }
 
     private function findAccount(string $email)
@@ -75,8 +77,7 @@ class UsersRepository extends Model
                         ]);
 
                         // $this->session->setFlashMessage("Nouvel employé ajouté, veuillez noter le mot de passe : " . $password);
-
-
+                        $this->mailtrap->sendMail($email, $username, $password);
                     } else {
                         $this->session->setFlashMessage("Veuillez sélectionner un statut pour votre employé !");
                         Render::render("employeesManagement");
