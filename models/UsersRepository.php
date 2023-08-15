@@ -76,7 +76,7 @@ class UsersRepository extends Model
                             "status" => $status,
                         ]);
 
-                        // $this->session->setFlashMessage("Nouvel employé ajouté, veuillez noter le mot de passe : " . $password);
+                        $this->session->setFlashMessage("Nouvel employé ajouté, les informations de connexion vous ont été envoyées par email");
                         $this->mailtrap->sendMail($email, $username, $password);
                     } else {
                         $this->session->setFlashMessage("Veuillez sélectionner un statut pour votre employé !");

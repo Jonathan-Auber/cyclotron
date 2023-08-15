@@ -1,17 +1,12 @@
 @import "./base/reset";
 @import "./base/typography";
 @import "./utils/variables";
-@import "./components/buttons";
 @import "./components/flashContainer";
 @import "./components/dashboardCard";
 @import "./layout/layout.scss";
 @import "./layout/menu-burger.scss";
 
-@import "./pages/index.scss";
 @import "./pages/dashboard.scss";
-@import "./pages/stock.scss";
-
-// @import "./pages/reporting.scss";
 
 @import "./pages/error";
 @import "./layout/media.scss";

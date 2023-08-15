@@ -1,32 +1,34 @@
 <h1>Chiffre d'affaire de l'entreprise</h1>
 <p class="tablet-message">Cette page n'est pas accessible depuis votre appareil, veuillez retourner à <a href="/cyclotron">l'accueil</a>.</p>
 <main id="admin-reporting" class="tablet-hide">
-    <table class="table p-3">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Produit</th>
-                <th scope="col" class="text-end">Chiffre d'affaire du jour</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <?php
-            $i = 1;
-            foreach ($daySales as $product) { ?>
+    <?php if (!empty($daySales)) { ?>
+        <table class="table p-3">
+            <thead>
                 <tr>
-                    <th scope="row"><?= $i ?></th>
-                    <td><?= $product['name'] ?></td>
-                    <td class="text-end"><?= $product['total_price'] ?> €</td>
+                    <th scope="col">#</th>
+                    <th scope="col">Produit</th>
+                    <th scope="col" class="text-end">Chiffre d'affaire du jour</th>
                 </tr>
-            <?php $i++;
-            } ?>
-            <tr>
-                <th scope="row" class=" fs-5">Total</th>
-                <td></td>
-                <td class="text-end fw-bold fst-italic fs-5"><?= $totalByDay ?> €</td>
-            </tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="table-group-divider">
+                <?php
+                $i = 1;
+                foreach ($daySales as $product) { ?>
+                    <tr>
+                        <th scope="row"><?= $i ?></th>
+                        <td><?= $product['name'] ?></td>
+                        <td class="text-end"><?= $product['total_price'] ?> €</td>
+                    </tr>
+                <?php $i++;
+                } ?>
+                <tr>
+                    <th scope="row" class=" fs-5">Total</th>
+                    <td></td>
+                    <td class="text-end fw-bold fst-italic fs-5"><?= $totalByDay ?> €</td>
+                </tr>
+            </tbody>
+        </table>
+    <?php } ?>
 
     <table class="table p-3 mt-5">
         <thead>

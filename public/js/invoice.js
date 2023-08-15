@@ -1,7 +1,6 @@
 const formContainer = document.querySelector("#invoiceContainer");
 let inputName = 1;
 const newRow = document.querySelector("#newRow");
-// url = window.location.href;
 
 async function dataProduct() {
   fetch("/cyclotron/Invoice/dataProduct", {
