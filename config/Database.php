@@ -9,7 +9,6 @@ class Database
     private static $instance = NULL;
     public static function getPdo(): PDO
     {
-
         if (self::$instance === NULL) {
             self::$instance = new PDO('mysql:host=localhost;dbname=cyclotron;charset=utf8', 'root', 'root', [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
