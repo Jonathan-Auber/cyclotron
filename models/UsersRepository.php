@@ -31,20 +31,23 @@ class UsersRepository extends Model
 
     public function login()
     {
-        if (isset($_POST['account'], $_POST['password']) && !empty($_POST)) {
-            $email = htmlspecialchars(trim($_POST['account']));
-            $password = htmlspecialchars(trim($_POST['password']));
-            $result = $this->findAccount($email);
-
-            if ($email === $result['email']) {
-                if (password_verify($password, $result['password'])) {
-                    $this->session->setSession($result['id'], $result['username'], $result['status']);
-                    return TRUE;
+        if (isset($_POST['email'], $_POST['password']) && !empty($_POST)) {
+            if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                $email = htmlspecialchars(trim($_POST['email']));
+                $password = htmlspecialchars(trim($_POST['password']));
+                $result = $this->findAccount($email);
+                if ($email === $result['email']) {
+                    if (password_verify($password, $result['password'])) {
+                        $this->session->setSession($result['id'], $result['username'], $result['status_id']);
+                        return TRUE;
+                    } else {
+                        $this->session->setFlashMessage("Votre mot de passe est erroné !");
+                    }
                 } else {
-                    $this->session->setFlashMessage("Votre mot de passe est erroné !");
+                    $this->session->setFlashMessage("Ce nom d'utilisateur n'existe pas !");
                 }
             } else {
-                $this->session->setFlashMessage("Ce nom d'utilisateur n'existe pas !");
+                $this->session->setFlashMessage("Cette adresse email n'est pas valide !");
             }
         }
     }
