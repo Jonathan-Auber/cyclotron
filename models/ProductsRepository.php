@@ -2,8 +2,6 @@
 
 namespace models;
 
-use Exception;
-
 class ProductsRepository extends Model
 {
     protected string $table = "products";

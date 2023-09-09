@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c714509e-ec9d-47e4-a874-87beddc33a5e" name="Changes" comment="Essai mailtrap">
-      <change beforePath="$PROJECT_DIR$/config/Autoloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/Autoloader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/CustomersRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/CustomersRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/InvoiceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/InvoiceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ProductsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/ProductsRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ReportingRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/ReportingRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/invoice.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/views/invoice.phtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/Database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/Database.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +90,7 @@
       <workItem from="1691479735210" duration="223000" />
       <workItem from="1691479966544" duration="153000" />
       <workItem from="1691590420863" duration="42000" />
+      <workItem from="1693143052293" duration="193000" />
     </task>
     <task id="LOCAL-00001" summary="Essai mailtrap">
       <option name="closed" value="true" />

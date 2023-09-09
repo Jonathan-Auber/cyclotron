@@ -34,7 +34,7 @@ class Routing
                     $controller = new $controllerName(); // new UsersController.php
                     if (isset($newUrl[2])) {
                         $id = intval($newUrl[2]);
-                        if ($id === 0) {
+                        if ($id === null) {
                             throw new Exception("404 : Cette page n'existe pas");
                         }
                         $controller->$methodName($id); // $controller->post(4);

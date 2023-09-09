@@ -39,7 +39,7 @@ class UsersRepository extends Model
                 if ($email === $result['email']) {
                     if (password_verify($password, $result['password'])) {
                         $this->session->setSession($result['id'], $result['username'], $result['status_id']);
-                        return TRUE;
+                        return;
                     } else {
                         $this->session->setFlashMessage("Votre mot de passe est erroné !");
                     }
@@ -71,7 +71,7 @@ class UsersRepository extends Model
                     if ($status >= 1 && $status <= 2) {
                         $password = $this->function->generatePassword();
                         $securePassword = password_hash($password, PASSWORD_DEFAULT);
-                        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET email = :email, username = :username, password = :password, status = :status");
+                        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET email = :email, username = :username, password = :password, status_id = :status");
                         $query->execute([
                             "email" => $email,
                             "username" => $username,
