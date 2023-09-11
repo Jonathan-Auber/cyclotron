@@ -41,10 +41,10 @@ class UsersRepository extends Model
                         $this->session->setSession($result['id'], $result['username'], $result['status_id']);
                         return;
                     } else {
-                        $this->session->setFlashMessage("Votre mot de passe est erroné !");
+                        $this->session->setFlashMessage("Nom d'utilisateur ou mot de passe incorrect !");
                     }
                 } else {
-                    $this->session->setFlashMessage("Ce nom d'utilisateur n'existe pas !");
+                    $this->session->setFlashMessage("Nom d'utilisateur ou mot de passe incorrect !");
                 }
             } else {
                 $this->session->setFlashMessage("Cette adresse email n'est pas valide !");
